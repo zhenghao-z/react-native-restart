@@ -19,11 +19,12 @@ public class RestartModule extends ReactContextBaseJavaModule {
 
     private static final String REACT_APPLICATION_CLASS_NAME = "com.facebook.react.ReactApplication";
     private static final String REACT_NATIVE_HOST_CLASS_NAME = "com.facebook.react.ReactNativeHost";
-
+    private Context context;
     private LifecycleEventListener mLifecycleEventListener = null;
 
     public RestartModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        this.context = reactContext;
     }
 
     private void loadBundleLegacy() {
