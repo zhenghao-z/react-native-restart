@@ -1,14 +1,19 @@
 package com.reactnativerestart;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.bridge.JSBundleLoader;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+
+import java.io.File;
+import java.lang.reflect.Field;
 
 public class RestartModule extends ReactContextBaseJavaModule {
 
@@ -47,7 +52,17 @@ public class RestartModule extends ReactContextBaseJavaModule {
                 @Override
                 public void run() {
                     try {
-                        instanceManager.recreateReactContextInBackground();
+                        File rootDir = new File(context.getFilesDir()+"/update", "index.jsbundle");
+
+                                                if (rootDir.exists()) {
+                                                    JSBundleLoader loader = JSBundleLoader.createFileLoader(rootDir.getAbsolutePath());
+                                                    Field loadField = instanceManager.getClass().getDeclaredField("mBundleLoader");
+                                                    loadField.setAccessible(true);
+                                                    loadField.set(instanceManager, loader);
+                                                    instanceManager.recreateReactContextInBackground();
+                                                }else {
+                                                    loadBundleLegacy();
+                                                }
                     } catch (Throwable t) {
                         loadBundleLegacy();
                     }
