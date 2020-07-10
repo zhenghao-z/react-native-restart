@@ -21,7 +21,7 @@ RCT_EXPORT_METHOD(Restart) {
             BOOL exist = [fileManager fileExistsAtPath:bundlepath];
 
             if (exist){
-                [self->_bridge setValue:bundlepath forKey:@"bundleURL"];
+                [self->_bridge setValue:[NSURL URLWithString:bundlepath] forKey:@"bundleURL"];
             }else{
                 [self->_bridge setValue:[[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"] forKey:@"bundleURL"];
             }
