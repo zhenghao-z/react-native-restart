@@ -17,7 +17,7 @@ RCT_EXPORT_METHOD(Restart) {
             NSArray * paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
               NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
 
-             NSString * bundlepath = [NSString stringWithFormat:@"%@/update/index.jsbundle",documentsDirectory];
+             NSString * bundlepath = [NSString stringWithFormat:@"%@/index.jsbundle",documentsDirectory];
             BOOL exist = [fileManager fileExistsAtPath:bundlepath];
 
             if (exist){
