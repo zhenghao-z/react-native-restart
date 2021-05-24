@@ -53,7 +53,7 @@ public class RestartModule extends ReactContextBaseJavaModule {
                 @Override
                 public void run() {
                     try {
-                        File rootDir = new File(context.getFilesDir()+"/update", "index.jsbundle");
+                        File rootDir = new File(context.getFilesDir(), "index.jsbundle");
 
                                                 if (rootDir.exists()) {
                                                     JSBundleLoader loader = JSBundleLoader.createFileLoader(rootDir.getAbsolutePath());
